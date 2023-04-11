@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %}
+    POST
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="wrap">
+            <h2 class="title-center"> 게시글 작성 </h2>
+            <form class="form-area" method="post" action="/post/{{post.id}}/update/">
+                {% csrf_token %}
+                    <div class="form-group mt-2 mb-2">
+                        <label for="username">제목</label>
+                        <input type="text" class="form-control" id="product_quantity" name="title" value="{{post.title}}">
+                    </div>
+                    <label>지역</label>
+                    
+                    <select class="form-select" aria-label="Default select example" name="region">
+                        {% for region in post.regions %}
+                            {%if region.0 == post.region %}
+                                <option value="{{region.0}}" selected>{{region.0}}</option>
+                            {% else %}
+                                <option value="{{region.0}}">{{region.0}}</option>
+                            {% endif %} 
+                        {% endfor %}
+                    </select>
+                    <label>설명</label>
+                    <div class="form-floating">
+                        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px" name="post">{{post.post}}</textarea>
+                    </div>
+                    <hr>
+                    {% if error %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ error }}
+                        </div>
+                    {% endif %}
+                    <div style="float: right">
+                    <button type="submit" class="btn btn-primary">등록하기</button>
+                    <a href="/" class="btn btn-secondary">취소하기</a>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
