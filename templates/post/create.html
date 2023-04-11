@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block title %}
+    POST
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="wrap">
+            <h2 class="title-center"> 게시글 작성 </h2>
+            <form class="form-area" method="post" action="/post/create/">
+                {% csrf_token %}                    
+                    <div class="form-group mt-2 mb-2">
+                        <label for="username">제목</label>
+                        <input type="text" class="form-control" id="product_quantity" name="title">
+                    </div>      
+                    <label>지역</label>
+                    <select class="form-select" aria-label="Default select example" name="region">
+                        <option selected>지역 선택!</option>
+                        <option value="서울">서울</option>
+                        <option value="경기도">경기도</option>
+                        <option value="경기도">경기도</option>
+                        <option value="전라도">전라도</option>
+                        <option value="충청도">충청도</option>
+                        <option value="경상도">경상도</option>                        
+                        <option value="제주도">제주도</option>
+                    </select>    
+                    <hr>        
+                    <label>이미지</label>
+                    <div class="input-group mb-3">
+                        <input type="file" class="form-control" id="inputGroupFile02" name="image">                        
+                    </div>
+                    <label>설명</label>
+                    <div class="form-floating">
+                        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px" name="post"></textarea>
+                        <label for="floatingTextarea2">나의 맛집을 소개하는 한마디!</label>
+                    </div>                    
+                    <hr>
+                    {% if error %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ error }}
+                        </div>
+                    {% endif %}
+                    <div style="float: right">
+                    <button type="submit" class="btn btn-primary">등록하기</button>
+                    <a href="/" class="btn btn-secondary">취소하기</a>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
