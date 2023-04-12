@@ -1,0 +1,70 @@
+@charset "utf-8";
+
+        @font-face {
+            font-family: 'establishRoomNo703OTF';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2112@1.0/establishRoomNo703OTF.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        h1 {
+            font-family: 'establishRoomNo703OTF', cursive;
+        }
+        .main {
+            background-color: green;
+            color: white;
+            height: 600px;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(https://file.notion.so/f/s/bdbe0771-ce9d-456e-b4f5-5710620b8381/Untitled.jpeg?id=1c0d6939-9470-4897-a6c3-8226f9dfe574&table=block&spaceId=24c771f9-c044-4d63-851f-660172d58cb7&expirationTimestamp=1681353681852&signature=6Nk64PqQL6JEcmCjD-G9E93XJmrb-Lji9K-VHBCWCKg&downloadName=Untitled.jpeg);
+            background-position: center;
+            background-size: cover;
+        }
+
+        .mycards {
+
+            width: 100%;
+            margin: 150px auto 80px auto;
+
+        }
+
+        .card {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            width: 250px;
+            gap: 20px; /* 카드 간격 조절 */
+        }
+
+        .pagination .page-link {
+            background-color: white;
+            color: black;
+        }
+
+        .pagination .page-item.disabled .page-link {
+            background-color: white;
+            color: black;
+        }
+
+        .pagination .page-item.active .page-link {
+            background-color: lightgray;
+            border: solid darkgray 1px;
+            color: black;
+        }
+
+        footer {
+            background-color: lightgray;
+        }
+
+        a {
+            text-decoration: none;
+            color: white;
+        }
+
+        header {
+
+            z-index: 999;
+        }

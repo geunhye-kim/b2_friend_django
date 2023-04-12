@@ -8,7 +8,7 @@ import os
 def feed_view(request):
     if request.method == 'GET':
         post_list = Post.objects.all()
-        return render(request, 'post/feed2.html',{post_list:post_list})
+        return render(request, 'post/feed.html',{post_list:post_list})
 
 
 def post_create_view(request):
