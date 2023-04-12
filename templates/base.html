@@ -48,20 +48,19 @@
                         class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="/">Home</a></li>
                         <li class="nav-item"><a class="nav-link" href="/post/create/">글쓰기</a></li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">지역선택</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#!">모든 지역</a></li>
-                                <li><a class="dropdown-item" href="#!">서울</a></li>
-                                <li><a class="dropdown-item" href="#!">경기도</a></li>
-                                <li><a class="dropdown-item" href="#!">강원도</a></li>
-                                <li><a class="dropdown-item" href="#!">충청도</a></li>
-                                <li><a class="dropdown-item" href="#!">전라도</a></li>
-                                <li><a class="dropdown-item" href="#!">경상도</a></li>
-                                <li><a class="dropdown-item" href="#!">제주도</a></li>
+                                <li><a class="dropdown-item" href="/">모든 지역</a></li>
+                                <li><a class="dropdown-item" href="/">서울</a></li>
+                                <li><a class="dropdown-item" href="/">경기도</a></li>
+                                <li><a class="dropdown-item" href="/">강원도</a></li>
+                                <li><a class="dropdown-item" href="/">충청도</a></li>
+                                <li><a class="dropdown-item" href="/">전라도</a></li>
+                                <li><a class="dropdown-item" href="/">경상도</a></li>
+                                <li><a class="dropdown-item" href="/">제주도</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -70,9 +69,9 @@
                         {% if not user.is_authenticated %}
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item active">
-                                <a class="nav-link" href="{% url 'login' %}"> Login <span class="sr-only"></span></a>
+                                <a class="nav-link" href="{% url 'login' %}"> 로그인 <span class="sr-only"></span></a>
                             <li class="nav-item active">
-                                <a class="nav-link" href="{% url 'signup' %}"> Sign Up <span class="sr-only"></span></a>
+                                <a class="nav-link" href="{% url 'signup' %}"> 회원가입 <span class="sr-only"></span></a>
                             </li>
                         </ul>
                         {% else %}
