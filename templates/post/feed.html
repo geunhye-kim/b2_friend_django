@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="main">
+        <section>
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5">
+                    <div class="col-lg-6">
+                        <h1 class="mt-5">맛있는건 정말 참을 수 없어</h1>
+                        <p>전국 방방곳곳 숨은 맛집들이 많다고 본인만 알고 있다가는 가게가 망할 수 있습니다.(경험담)
+                            맛집 사장님들을 혼내줄 수 있는 바로 그 사이트, 나만의 맛집을 자랑해보세요! 얍</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </div>
+    <div class="mycards">
+        <div class="container px-4 px-lg-5 mt-5">
+            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                <div class="col mb-5">
+                    <div class="card h-100">
+                        <!-- 추천스티커-->
+                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">
+                            추천글
+                        </div>
+                        <!-- 포스트 이미지를 가져오는 곳-->
+                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..."/>
+                        <!-- 포스팅 카드가 보여지는 곳-->
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <!-- 게시글 title-->
+                                <h5 class="fw-bolder">TITLE</h5>
+                                <!-- 게시글 작성자-->
+                                <label for="" class="">지역</label>
+                                <hr>
+                                <label for="" class="">작성자</label>
+                            </div>
+                        </div>
+                        <!-- 보러가기 버튼-->
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">보러가기</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mb-5">
+                    <div class="card h-100">
+                        <!-- 포스트 이미지를 가져오는 곳-->
+                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..."/>
+                        <!-- 포스팅 카드가 보여지는 곳-->
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <!-- 게시글 title-->
+                                <h5 class="fw-bolder">TITLE</h5>
+                                <!-- 게시글 작성자-->
+                                <label for="" class="">지역</label>
+                                <hr>
+                                <label for="" class="">작성자</label>
+                            </div>
+                        </div>
+                        <!-- 보러가기 버튼-->
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">보러가기</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mb-5">
+                    <div class="card h-100">
+                        <!-- 포스트 이미지를 가져오는 곳-->
+                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..."/>
+                        <!-- 포스팅 카드가 보여지는 곳-->
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <!-- 게시글 title-->
+                                <h5 class="fw-bolder">TITLE</h5>
+                                <!-- 게시글 작성자-->
+                                <label for="" class="">지역</label>
+                                <hr>
+                                <label for="" class="">작성자</label>
+                            </div>
+                        </div>
+                        <!-- 보러가기 버튼-->
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">보러가기</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mb-5">
+                    <div class="card h-100">
+                        <!-- 포스트 이미지를 가져오는 곳-->
+                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..."/>
+                        <!-- 포스팅 카드가 보여지는 곳-->
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <!-- 게시글 title-->
+                                <h5 class="fw-bolder">TITLE</h5>
+                                <!-- 게시글 작성자-->
+                                <label for="" class="">지역</label>
+                                <hr>
+                                <label for="" class="">작성자</label>
+                            </div>
+                        </div>
+                        <!-- 보러가기 버튼-->
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">보러가기</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nav aria-label="Pagination">
+                        <hr class="my-0" />
+                        <ul class="pagination justify-content-center my-4">
+                            <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1" aria-disabled="true">Newer</a></li>
+                            <li class="page-item active" aria-current="page"><a class="page-link" href="#!">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#!">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#!">3</a></li>
+                            <li class="page-item disabled"><a class="page-link" href="#!">...</a></li>
+                            <li class="page-item"><a class="page-link" href="#!">15</a></li>
+                            <li class="page-item"><a class="page-link" href="#!">Older</a></li>
+                        </ul>
+                    </nav>
+{% endblock %}
