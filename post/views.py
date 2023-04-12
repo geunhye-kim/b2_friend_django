@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.core.paginator import Paginator
 from .models import Post
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
@@ -8,7 +9,10 @@ import os
 def feed_view(request):
     if request.method == 'GET':
         post_list = Post.objects.all()
-        return render(request, 'post/feed.html',{post_list:post_list})
+        paginator = Paginator(post_list, 8)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+        return render(request, 'post/feed.html',{page_obj:page_obj})
 
 
 def post_create_view(request):
