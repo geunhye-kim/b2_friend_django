@@ -12,7 +12,21 @@ def feed_view(request):
 
 
 def post_create_view(request):
-    pass
+    if request.method == 'GET':
+        return render(request, 'post/create.html')
+
+    elif request.method == 'POST':
+        title = request.POST.get('title', '')
+        region = request.POST.get('region', '')
+        image = request.POST.get('image')
+        content = request.POST.get('post', '')
+
+        if title == '' or region == '지역 선택!':
+            return render(request, 'post/create.html', {'error': '제목과 지역은 필수입니다!'})
+        else:            
+            post = Post.objects.create(title=title, region=region, image=image, post=content, user=request.user)
+            return redirect('post', post.id)
+            # return redirect('feed')
 
 
 def post_view(request, id):

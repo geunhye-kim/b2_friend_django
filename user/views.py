@@ -51,14 +51,14 @@ def login_view(request):
             me = auth.authenticate(request, username=user_name, password=user_password)  # 사용자 불러오기
             if me is not None:  # 저장된 사용자의 패스워드와 입력받은 패스워드 비교
                 auth.login(request, me)
-                return redirect('/feed')
+                return redirect('/')
             else:
                 return render(request, 'user/login.html', {'error': '유저이름 혹은 패스워드를 확인 해 주세요.'})  # 로그인 실패
 
     elif request.method == 'GET':
         user = request.user.is_authenticated  # 사용자가 로그인 되어 있는지 검사
         if user:  # 로그인이 되어 있다면
-            return redirect('/feed')
+            return redirect('/')
         else:  # 로그인이 되어 있지 않다면
             return render(request, 'user/login.html')
 
@@ -66,5 +66,5 @@ def login_view(request):
 @login_required
 def logout_view(request):
     auth.logout(request) # 인증 되어있는 정보를 없애기
-    return redirect("/feed")
+    return redirect("/")
 

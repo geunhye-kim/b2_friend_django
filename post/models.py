@@ -1,12 +1,12 @@
 from django.db import models
-# from account.models import UserModel
+from user.models import UserModel
 
 
 class Post(models.Model):
     class Meta:
         db_table = "my_post"
 
-    # user = models.ForeignKey(UserModel, on_delete=models.CASCADE)
+    user = models.ForeignKey(UserModel, on_delete=models.CASCADE)
     title = models.CharField(max_length=256)
     regions = (
         ('서울', '서울'),
@@ -18,7 +18,7 @@ class Post(models.Model):
         ('제주도', '제주도'),
     )
     region = models.CharField(choices=regions, max_length=3)
-    image = models.ImageField(upload_to="image/", null=True, blank=True)
+    image = models.ImageField(upload_to='', null=True, blank=True)
     post = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

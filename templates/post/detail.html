@@ -7,7 +7,9 @@
     <p>{{post.post}}</p>
     <p>{{post.created_at}}</p>
     <p>{{post.updated_at}}</p>
-    <img src="{{post.image.url}}" alt="">
+    {% if post.image %}
+        <img src="{{post.image.url}}" alt="">
+    {% endif %}
     <a href ="/post/{{post.id}}/update">수정</a>
     <a href="/post/{{post.id}}/delete">삭제</a>
 {% endblock %}
