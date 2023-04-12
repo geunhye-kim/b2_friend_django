@@ -39,15 +39,17 @@
 
             width: 100%;
             margin: 150px auto 80px auto;
+            display: flex;
+            justify-content: space-around;
 
         }
 
         .card {
-            display: flex;
-            justify-content: space-around;
+
             align-items: center;
-            width: 250px;
+            width: 220px;
             gap: 20px; /* 카드 간격 조절 */
+            margin: auto 50px auto 50px;
         }
 
         .pagination .page-link {
@@ -78,6 +80,13 @@
         header {
 
             z-index: 999;
+        }
+        footer {
+            margin-top: 80px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+
         }
     </style>
 </head>
