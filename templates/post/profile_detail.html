@@ -1,9 +1,0 @@
-{% extends 'base.html' %}
-
-{% block content %}
-  <h1>{{ profile.name }}</h1>
-  <p>Location: {{ profile.location }}</p>
-  <p>Email: {{ profile.email }}</p>
-  <p>Content: {{ profile.content }}</p>
-{#  <a href="{% url 'profile_edit' pk=profile.pk %}">Edit profile</a>#}
-{% endblock %}

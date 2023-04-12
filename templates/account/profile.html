@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>프로필 페이지</title>
+    <style>
+      body {
+        max-width: 600px;
+        margin: 0 auto;
+        font-family: sans-serif;
+        font-size: 18px;
+        line-height: 1.5;
+        padding: 20px;
+      }
+      h1 {
+        font-size: 32px;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+      p {
+        margin-bottom: 10px;
+      }
+      a {
+        display: block;
+        text-align: center;
+        margin-top: 20px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>프로필 페이지</h1>
+    <p><strong>이름:</strong> {{ profile.name }}</p>
+    <p><strong>지역:</strong> {{ profile.location }}</p>
+    <p><strong>이메일:</strong> {{ profile.email }}</p>
+    <p><strong>내용:</strong> {{ profile.content }}</p>
+    <a href="{% url 'profile_edit' %}">프로필 수정</a>
+  </body>
+</html>
