@@ -22,3 +22,14 @@ class Post(models.Model):
     post = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+
+class Comment(models.Model):
+    class Meta:
+        db_table = "my_comment"
+
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    user = models.ForeignKey(UserModel, on_delete=models.CASCADE)
+    name = models.CharField(max_length=256)
+    comment = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
