@@ -1,39 +1,21 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>프로필 페이지</title>
-    <style>
-      body {
-        max-width: 600px;
-        margin: 0 auto;
-        font-family: sans-serif;
-        font-size: 18px;
-        line-height: 1.5;
-        padding: 20px;
-      }
-      h1 {
-        font-size: 32px;
-        margin-bottom: 20px;
-        text-align: center;
-      }
-      p {
-        margin-bottom: 10px;
-      }
-      a {
-        display: block;
-        text-align: center;
-        margin-top: 20px;
-        font-weight: bold;
-      }
-    </style>
-  </head>
-  <body>
-    <h1>프로필 페이지</h1>
-    <p><strong>이름:</strong> {{ profile.name }}</p>
-    <p><strong>지역:</strong> {{ profile.location }}</p>
-    <p><strong>이메일:</strong> {{ profile.email }}</p>
-    <p><strong>내용:</strong> {{ profile.content }}</p>
-    <a href="{% url 'profile_edit' %}">프로필 수정</a>
-  </body>
-</html>
+{% extends 'base.html' %}
+{% block content %}
+<div class="col-lg-4">
+  <div class="card mb-4">
+    <div class="card-body text-center">
+      <img src="#" alt="avatar"
+        class="rounded-circle img-fluid" style="width: 150px;">
+        <!-- <div class="input-group mb-3">
+          <input type="file" class="form-control" id="inputGroupFile02" name="image"> -->
+      <h5 class="my-3">{{ user.username }}</h5>
+      <p class="text-muted mb-1">{{ user.bio }}</p>
+      <p class="text-muted mb-4">{{ user.address }}</p>
+        <p class="text-muted mb-4">{{ user.email }}</p>
+      <div class="d-flex justify-content-center mb-2">
+          <button type="button" class="btn btn-primary">Follow</button>
+          <button type="button" a class="btn btn-primary" href="{% url 'profile_edit' %}">프로필 수정</button></a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
