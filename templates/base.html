@@ -39,6 +39,13 @@
         }
         h1 { font-size:50px;
         margin-bottom: 20px;}
+        #profile_card {
+            width: 100%;
+        }
+        .btn_profile {
+            background-color: tomato;
+
+        }
         .mycards {
 
         width: 100%;
@@ -46,13 +53,17 @@
 
         }
 
-        .card {
+        .row .g-0{
+
+        }
+        .card .h-100 {
         display: flex;
         justify-content: space-around;
         align-items: center;
         width: 250px;
         gap: 20px; /* 카드 간격 조절 */
         }
+
 
         .pagination .page-link {
             background-color: white;
@@ -68,6 +79,12 @@
             background-color: lightgray;
             border: solid darkgray 1px;
             color: black;
+        }
+
+        .col-lg-4 {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
         }
 
         .wrap {
@@ -99,7 +116,20 @@
             transform:scale(1.1);
             transition: transform 0.3s ease-in-out;
         }
+       
+      .mypage_body {
+        width: 100%;
+        margin: 0 auto;
+        /* font-family: sans-serif; */
+        font-size: 18px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        line-height: 1.5;
+        padding: 20px;
+      }
 
+    </style>
     </style>
 </head>
 
@@ -152,7 +182,7 @@
                        </span>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="/"> 마이페이지 </a>
+                        <a class="nav-link" href="{% url 'profile' %}"> 마이페이지 </a>
                     <li class="nav-item active">
                         <a class="nav-link" href="/logout"> 로그아웃 </a>
                 </li>

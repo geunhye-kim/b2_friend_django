@@ -1,70 +1,57 @@
 {% extends 'base.html' %}
 {% block content %}
-<section class="vh-100" style="background-color: #f4f5f7;">
-  <div class="container py-5 h-100">
-    <div class="row d-flex justify-content-center align-items-center h-100">
-      <div class="col col-lg-6 mb-4 mb-lg-0">
-        <div class="card mb-3" style="border-radius: .5rem;">
-          <div class="row g-0">
-            <div class="col-md-4 gradient-custom text-center text-white"
-              style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
-              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
-                alt="Avatar" class="img-fluid my-5" style="width: 80px;" />
-              <h5>{{ user.username }}</h5>
-              <p>{{ user.address }}</p>
-              <i class="far fa-edit mb-5"></i>
-            </div>
-            <div class="col-md-8">
-              <div class="card-body p-4">
-                <h6>Information</h6>
-                <hr class="mt-0 mb-4">
-                <div class="row pt-1">
-                  <div class="col-6 mb-3">
-                    <h6>Email</h6>
-                    <p class="text-muted">{{ user.email }}</p>
-                  </div>
-                  <div class="col-6 mb-3">
-                    <h6>Phone</h6>
-                    <p class="text-muted">{{ user.phone }}</p>
-                  </div>
-                </div>
-                <h6>Projects</h6>
-                <hr class="mt-0 mb-4">
-                <div class="row pt-1">
-                  <div class="col-6 mb-3">
-                    <h6>나의 한마디</h6>
-                    <p class="text-muted">{{ user.bio }}</p>
-                  </div>
-                </div>
-                <div class="d-flex justify-content-start">
-                    <a href="#!"><i class="fab fa-facebook-f fa-lg me-3"></i></a>
-                    <a href="#!"><i class="fab fa-twitter fa-lg me-3"></i></a>
-                    <a href="#!"><i class="fab fa-instagram fa-lg"></i></a>
-                    <a href="{% url 'profile_edit' %}"><button type="button" class="btn btn-primary">프로필 수정</button></a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
-{#  <div class="col-lg-4">#}
-{#        <div class="card mb-4">#}
-{#          <div class="card-body text-center">#}
-{#            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"#}
-{#              class="rounded-circle img-fluid" style="width: 150px;">#}
-{#            <h5 class="my-3">{{ user.username }}</h5>#}
-{#            <p class="text-muted mb-1">{{ user.bio }}</p>#}
-{#            <p class="text-muted mb-4">{{ user.address }}</p>#}
-{#              <p class="text-muted mb-4">{{ user.email }}</p>#}
-{#            <div class="d-flex justify-content-center mb-2">#}
-{#                <button type="button" class="btn btn-primary">Follow</button>#}
-{#                <button type="button" class="btn btn-primary" a href="{% url 'profile_edit' %}">프로필 수정</button>#}
-{#            </div>#}
-{#          </div>#}
-{#        </div>#}
-{#  </div>#}
+    <section class="vh-100" style="background-color: #f4f5f7;">
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col col-lg-6 mb-4 mb-lg-0">
+                    <div id="profile_card">
+                        <div class="card mb-3" style="border-radius: .5rem;">
+                            <div class="row g-0">
+                                <div class="col-md-4 gradient-custom text-center"
+                                     style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
+                                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
+                                         alt="Avatar" class="img-fluid my-5" style="width: 140px;"/>
+                                    <h5>{{ user.username }}</h5>
+                                    <p>{{ user.address }}</p>
+                                    <i class="far fa-edit mb-5"></i>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body p-4">
+                                        <h6>Information</h6>
+                                        <hr class="mt-0 mb-4">
+                                        <div class="row pt-1">
+                                            <div class="col-6 mb-3">
+                                                <h6>Email</h6>
+                                                <p class="text-muted">{{ user.email }},이메일</p>
+                                            </div>
+                                            <div class="col-6 mb-3">
+                                                <h6>Phone</h6>
+                                                <p class="text-muted">{{ user.phone }}</p>
+                                            </div>
+                                        </div>
+                                        <h6>Projects</h6>
+                                        <hr class="mt-0 mb-4">
+                                        <div class="row pt-1">
+                                            <div class="col-6 mb-3">
+                                                <h6>나의 한마디</h6>
+                                                <p class="text-muted">{{ user.bio }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex justify-content-start">
+                                            <a href="#!"><button type="button" class="btn btn-primary me-2">내가 쓴 글 게시글 {{ user.post }}개</button></a>
+                                            <a href="{% url 'profile_edit' %}">
+                                                <button type="button" class="btn_profile">프로필 수정</button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
 {% endblock %}
