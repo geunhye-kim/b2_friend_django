@@ -12,9 +12,9 @@
                     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
                     <div class="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
 
-                        <form style="width: 23rem;">
+                        <form style="width: 23rem;" method="post" action="/signup/">
                             <h3 class="title-center"> 회원가입 </h3>
-                            <form class="form-area" method="post" action="/signup/">
+                            <form class="form-area">
                             <br>
                                 {% csrf_token %}
                                 <div class="form-group mt-2 mb-2">

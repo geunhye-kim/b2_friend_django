@@ -17,19 +17,19 @@
                     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
                     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
                     <div class="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
-                        <form style="width: 23rem;">
+                        <form style="width: 23rem;" action="/login/" method="post">
                             <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">로그인</h3>
-                            <form class="form-area" action="/login/" method="post">
+                            <form class="form-area">
                                 {% csrf_token %}
                                 <div class="form-outline mb-4">
                                     <i class="material-icons" style="font-size:24px">account_box</i>
                                     <label class="form-label" for="user_name">아이디</label>
-                                    <input type="text" id="user_name" class="form-control form-control-lg"/>
+                                    <input type="text" id="user_name" name="user_name" class="form-control form-control-lg"/>
                                 </div>
                                 <div class="form-outline mb-4">
                                     <i class="fa fa-key" style="font-size:24px"></i>
                                     <label class="form-label" for="user_password">비밀번호</label>
-                                    <input type="password" id="user_password" class="form-control form-control-lg"/>
+                                    <input type="password" id="user_password" name="user_password" class="form-control form-control-lg"/>
                                 </div>
                                 {% if error %}
                                     <div class="alert alert-danger" role="alert">
