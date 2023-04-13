@@ -5,8 +5,9 @@ from .forms import ProfileForm
 
 def profile(request):
     user = request.user
-    print(user)
-    return render(request, 'account/profile.html', {'user': user})
+    count = user.mypost.filter(user_id=user.id).count()
+    print(count)
+    return render(request, 'account/profile.html', {'user': user, 'mypost_count': count})
 
 
 def profile_edit(request):

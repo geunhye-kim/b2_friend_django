@@ -6,7 +6,8 @@ class Post(models.Model):
     class Meta:
         db_table = "my_post"
 
-    user = models.ForeignKey(UserModel, on_delete=models.CASCADE)
+    user = models.ForeignKey(
+        UserModel, on_delete=models.CASCADE, related_name="mypost")
     title = models.CharField(max_length=256)
     regions = (
         ('서울', '서울'),
