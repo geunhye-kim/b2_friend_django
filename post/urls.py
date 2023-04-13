@@ -4,7 +4,8 @@ from . import views
 
 urlpatterns = [
     path('', views.feed_view, name='feed'),  # 피드 페이지
-    # path('', views.feed_seoul_view, name='feed'),  # 피드 페이지
+    path('feed/<str:region>/', views.feed_region_view,
+         name='feed_region'),  # 지역별 피드 페이지
     path('post/create/', views.post_create_view, name='post_create'),  # 글쓰기 페이지
     path('post/<int:id>/', views.post_view, name='post'),  # 게시글 상세 페이지
     path('post/<int:id>/update/', views.post_update_view,

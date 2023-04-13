@@ -7,13 +7,21 @@ import os
 
 
 def feed_view(request):
-    post_list = Post.objects.all()
-    paginator = Paginator(post_list, per_page=8)
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-    return render(request, 'post/feed.html', {'page_obj': page_obj})
+    if request.method == 'GET':
+        post_list = Post.objects.all()
+        paginator = Paginator(post_list, per_page=8)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+        return render(request, 'post/feed.html', {'page_obj': page_obj})
 
 
+def feed_region_view(request, region):
+    if request.method == 'GET':
+        post_list = Post.objects.filter(region=region)
+        paginator = Paginator(post_list, 8)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+        return render(request, 'post/feed.html', {'post_list': post_list, 'page_obj': page_obj})
 
 
 def post_create_view(request):

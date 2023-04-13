@@ -10,16 +10,16 @@
                 {% csrf_token %}                    
                     <div class="form-group mt-2 mb-2">
                         <label for="username">제목</label>
-                        <input type="text" class="form-control" id="product_quantity" name="title">
+                        <input type="text" class="form-control" name="title">
                     </div>      
                     <label>지역</label>
                     <select class="form-select" aria-label="Default select example" name="region">
                         <option selected>지역 선택!</option>
                         <option value="서울">서울</option>
                         <option value="경기도">경기도</option>
-                        <option value="경기도">경기도</option>
-                        <option value="전라도">전라도</option>
+                        <option value="강원도">강원도</option>
                         <option value="충청도">충청도</option>
+                        <option value="전라도">전라도</option>
                         <option value="경상도">경상도</option>                        
                         <option value="제주도">제주도</option>
                     </select>    
@@ -40,8 +40,8 @@
                         </div>
                     {% endif %}
                     <div style="float: right">
-                    <button type="submit" class="btn btn-primary">등록하기</button>
-                    <a href="/" class="btn btn-secondary">취소하기</a>
+                    <button type="submit" class="btn btn-outline-dark">등록하기</button>
+                    <a href="/" class="btn btn-outline-dark">취소하기</a>
                 </div>
             </form>
         </div>

@@ -70,6 +70,13 @@
             color: black;
         }
 
+        .wrap {
+            width: 400px;
+            margin: 0 auto;
+            margin-top: 50px;
+            margin-bottom: 200px;
+        }
+
         footer {
             background-color: lightgray;
             margin-top: 200px;
@@ -94,10 +101,6 @@
         }
 
     </style>
-    <script>
-        let select_box = document.getElementId()
-
-    </script>
 </head>
 
 <body>
@@ -117,16 +120,16 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
                        data-bs-toggle="dropdown" aria-expanded="false">지역선택</a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown" id="region-box" onchange="changeEvent()">
-                        <li><a class="dropdown-item" href="#!">모든 지역</a></li>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="/">모든 지역</a></li>
                         <div class="dropdown-divider"></div>
-                        <li><a class="dropdown-item" href="#!">서울</a></li>
-                        <li><a class="dropdown-item" href="#!">경기도</a></li>
-                        <li><a class="dropdown-item" href="#!">강원도</a></li>
-                        <li><a class="dropdown-item" href="#!">충청도</a></li>
-                        <li><a class="dropdown-item" href="#!">전라도</a></li>
-                        <li><a class="dropdown-item" href="#!">경상도</a></li>
-                        <li><a class="dropdown-item" href="#!">제주도</a></li>
+                        <li><a class="dropdown-item" href="{% url 'feed_region' region="서울" %}">서울</a></li>
+                        <li><a class="dropdown-item" href="{% url 'feed_region' region="경기도" %}">경기도</a></li>
+                        <li><a class="dropdown-item" href="{% url 'feed_region' region="강원도" %}">강원도</a></li>
+                        <li><a class="dropdown-item" href="{% url 'feed_region' region="충청도" %}">충청도</a></li>
+                        <li><a class="dropdown-item" href="{% url 'feed_region' region="전라도" %}">전라도</a></li>
+                        <li><a class="dropdown-item" href="{% url 'feed_region' region="경상도" %}">경상도</a></li>
+                        <li><a class="dropdown-item" href="{% url 'feed_region' region="제주도" %}">제주도</a></li>
                     </ul>
                 </li>
             </ul>
