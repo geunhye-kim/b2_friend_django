@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-
 {% block content %}
     <div class="main">
         <section>
@@ -7,18 +6,17 @@
                 <div class="row gx-4 gx-lg-5">
                     <div class="col-lg-6">
                         <h1 class="mt-5">맛있는건 정말 참을 수 없어</h1>
-                        <p>전국 방방곳곳 숨은 맛집들이 많다고 본인만 알고 있다가는 가게가 망할 수 있습니다.(경험담)
-                            맛집 사장님들을 혼내줄 수 있는 바로 그 사이트, 나만의 맛집을 자랑해보세요! 얍</p>
+                        <p>수많은 광고성 맛집들을 제치고 '진짜'만을 찾을 수 있는 사이트입니다. 나만 알고있던 맛집들을 모두모두 공유해주세요!</p>
                     </div>
                 </div>
-
             </div>
         </section>
     </div>
     <div class="mycards">
         <div class="container px-4 px-lg-5 mt-5">
             <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                {% for post in post_list %}
+                {% for post in page_obj %}
+                    <!--페이지 오브젝트에서 포스트를 불러오는 것-->
                     <div class="col mb-5">
                         <div class="card h-100">
                             <!-- 추천스티커-->
@@ -48,16 +46,38 @@
             </div>
         </div>
     </div>
-    <nav aria-label="Pagination">
-                        <hr class="my-0" />
-                        <ul class="pagination justify-content-center my-4">
-                            <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1" aria-disabled="true">Newer</a></li>
-                            <li class="page-item active" aria-current="page"><a class="page-link" href="#!">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#!">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#!">3</a></li>
-                            <li class="page-item disabled"><a class="page-link" href="#!">...</a></li>
-                            <li class="page-item"><a class="page-link" href="#!">15</a></li>
-                            <li class="page-item"><a class="page-link" href="#!">Older</a></li>
-                        </ul>
-                    </nav>
+   <!-- 페이지네이터 -->
+<nav aria-label="Pagination">
+    <hr class="my-0" />
+    <ul class="pagination justify-content-center my-4">
+        {% if page_obj.has_previous %}
+            <!-- 현재 페이지 이전의 페이지가 있는지 검토하는 함수,있다면 Ture값을 없으면 False값을 반환하여 Ture값일 경우 이전의 페이지 넘버를 보여줌-->
+        <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+            <!-- ?page=문은 흔히 URL 뒤에 ?뒤에 숫자가 붙는 쿼리 스트링(Query String)이라고 한다네요...-->
+        {% else %}
+        <li class="page-item disabled"><a class="page-link" href="#!">&laquo;</a></li>
+        {% endif %}
+
+        {% for num in page_obj.paginator.page_range %}
+            <!-- 전체 페이지 범위를 반복하면서 각 페이지 번호에 대한 링크를 생성하는데 사용되며 현재페이지=active활성화시킴-->
+        {% if num == page_obj.number %}
+            <!--  num은 페이지네이터에서 돌고있는 페이지 번호, page_obj.number는 현재 요청된 페이지 번호, 즉 현재 페이지를 나타냄 -->
+        <li class="page-item active" aria-current="page"><a class="page-link" href="#!">{{ num }}</a></li>
+        {% else %}
+        {% if num > page_obj.number|add:'-2' and num < page_obj.number|add:'2' %}
+            <!-- 페이지 기준 -2개의 페이지와 +2개의 페이지 리스트를 보여주기 위함 -->
+        <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+        {% endif %}
+        {% endif %}
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+            <!-- 다음 페이지가 있다면 >>버튼을 눌렀을때 다음페이지가 나타남-->
+        <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+        {% else %}
+        <li class="page-item disabled"><a class="page-link" href="#!">&raquo;</a></li>
+        {% endif %}
+    </ul>
+</nav>
+
 {% endblock %}
