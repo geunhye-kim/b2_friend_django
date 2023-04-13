@@ -82,7 +82,7 @@ def comment_create(request,id):
     if request.method == 'POST':
         comment = request.POST.get('comment', '')
         if comment == '':
-            return HttpResponse('댓글을 입력해주세요.')
+            return redirect('post', post.id)
         else:
             Comment.objects.create(name= request.user.username, comment=comment, user=request.user, post=post)
             return redirect('post', post.id)
@@ -95,3 +95,19 @@ def comment_delete(request, comment_id, id):
         comment.delete()
     return redirect('post', comment.post.id)
     
+
+@login_required
+def comment_edit(request, id, comment_id):
+    post = Post.objects.get(id=id)
+    comment = Comment.objects.get(id=comment_id)
+    if request.method == "POST":
+        comment_data = request.POST.get('comment', '')
+        if comment == '':
+            return redirect('post', post.id)
+        else:
+            comment.comment = comment_data
+            comment.save()
+    return redirect('post', post.id)
+    
+
+
