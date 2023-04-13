@@ -14,9 +14,12 @@
             {% if post.user == request.user %}
                 <a href ="{% url 'post_update' id=post.id %}" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">수정하기</a>
                 <a class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#staticBackdrop">삭제하기</a>
+            {%else%}
+                <a class="btn btn-outline-dark" data-bs-toggle="modal"  onclick="notuser()">수정하기</a>
+                <a class="btn btn-outline-dark" data-bs-toggle="modal"  onclick="notuser()">삭제하기</a>
             {% endif %}
         </div>
-
+        {% if post.user == request.user %}
         <!-- 수정하기 Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -67,8 +70,8 @@
                 </div>
             </div>
         </div>
-
-        <!-- 삭제하기 Modal -->    
+       
+        <!-- 삭제하기 Modal -->
         <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">
               <div class="modal-content">
@@ -86,8 +89,8 @@
               </div>
             </div>
         </div>
+        {% endif %}
     </div>    
-
     <form action="{%url 'comment' id=post.id%}"method = 'post'>
         {%csrf_token%}
         <input type="text" name="comment">
@@ -98,9 +101,17 @@
             <li>이름 :{{comment.name}}</li>
             <li>내용 :{{comment.comment}}</li>
             <li>작성일: {{comment.created_at}}</li>
-            {% if comment.user == request.user %}
-            <li><a href="{%url 'comment_delete' id=post.id comment_id=comment.id%}">삭제</a></li>
-            {% endif %}
+            {%if comment.user == request.user%}
+                <li><a href="{%url 'comment_delete' id=post.id comment_id=comment.id%}">삭제</a></li>
+            {%else%}
+                <li><a onclick="notuser()">삭제</a></li>
+            {%endif%}
+
         {% endfor %}
     </ul>
+    <script>
+        function notuser() {
+            alert('권한이 없습니다');
+        }
+    </script>
 {% endblock %}
