@@ -87,4 +87,20 @@
             </div>
         </div>
     </div>    
+
+    <form action="{%url 'comment' id=post.id%}"method = 'post'>
+        {%csrf_token%}
+        <input type="text" name="comment">
+        <input type="submit" value="작성하기">
+    </form>
+    <ul>
+        {% for comment in comments%}
+            <li>이름 :{{comment.name}}</li>
+            <li>내용 :{{comment.comment}}</li>
+            <li>작성일: {{comment.created_at}}</li>
+            {% if comment.user == request.user %}
+            <li><a href="{%url 'comment_delete' id=post.id comment_id=comment.id%}">삭제</a></li>
+            {% endif %}
+        {% endfor %}
+    </ul>
 {% endblock %}
