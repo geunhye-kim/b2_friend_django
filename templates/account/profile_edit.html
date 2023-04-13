@@ -1,0 +1,14 @@
+<form method="post">
+  {% csrf_token %}
+  <div style="display: flex; flex-direction: column; max-width: 600px; margin: 0 auto;">
+    <label for="{{ form.name.id_for_label }}">이름:</label>
+    {{ form.name }}
+    <label for="{{ form.location.id_for_label }}">지역:</label>
+    {{ form.location }}
+    <label for="{{ form.email.id_for_label }}">이메일:</label>
+    {{ form.email }}
+    <label for="{{ form.content.id_for_label }}">내용:</label>
+    {{ form.content }}
+    <button type="submit" style="margin-top: 10px;">저장</button>
+  </div>
+</form>

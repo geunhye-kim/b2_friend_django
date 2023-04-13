@@ -6,7 +6,7 @@
     <div class="container">
         <div class="wrap">
             <h2 class="title-center"> 게시글 작성 </h2>
-            <form class="form-area" method="post" action="/post/create/">
+            <form class="form-area" enctype="multipart/form-data" method="post" action="{% url 'post_create' %}">
                 {% csrf_token %}                    
                     <div class="form-group mt-2 mb-2">
                         <label for="username">제목</label>

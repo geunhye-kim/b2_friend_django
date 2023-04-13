@@ -7,16 +7,32 @@ import os
 
 
 def feed_view(request):
-    if request.method == 'GET':
-        post_list = Post.objects.all()
-        paginator = Paginator(post_list, 8)
-        page_number = request.GET.get('page')
-        page_obj = paginator.get_page(page_number)
-        return render(request, 'post/feed.html',{page_obj:page_obj})
+    post_list = Post.objects.all()
+    paginator = Paginator(post_list, per_page=8)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'post/feed.html', {'page_obj': page_obj})
+
+
 
 
 def post_create_view(request):
-    pass
+    if request.method == 'GET':
+        return render(request, 'post/create.html')
+
+    elif request.method == 'POST':
+        title = request.POST.get('title', '')
+        region = request.POST.get('region', '')
+        image = request.FILES.get('image')
+        content = request.POST.get('post', '')
+
+        if title == '' or region == '지역 선택!':
+            return render(request, 'post/create.html', {'error': '제목과 지역은 필수입니다!'})
+        else:
+            post = Post.objects.create(
+                title=title, region=region, image=image, post=content, user=request.user)
+            return redirect('post', post.id)
+            # return redirect('feed')
 
 
 def post_view(request, id):
@@ -31,14 +47,15 @@ def post_update_view(request, id):
     if request.method == 'GET':
         return render(request, 'post/update.html', {'post': post})
     elif request.method == 'POST':
-        post.title = request.POST.get('title','')
-        post.post = request.POST.get('post','')
-        post.region = request.POST.get('region','')
+        post.title = request.POST.get('title', '')
+        post.post = request.POST.get('post', '')
+        post.region = request.POST.get('region', '')
         if post.title == '' or post.post == '':
             return redirect('post_update', id=post.id)
         else:
             post.save()
             return redirect('feed')
+
 
 @login_required
 def post_delete_view(request, id):
