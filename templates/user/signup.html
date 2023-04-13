@@ -4,7 +4,88 @@
     회원가입
 {% endblock %}
 {% block content %}
+    <section class="vh-100">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-6 text-black">
+                    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+                    <div class="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
 
+                        <form style="width: 23rem;">
+                            <h3 class="title-center"> 회원가입 </h3>
+                            <form class="form-area" method="post" action="/signup/">
+                            <br>
+                                {% csrf_token %}
+                                <div class="form-group mt-2 mb-2">
+                                    <i class="material-icons" style="font-size:24px">account_box</i>
+                                    <label for="user_name">아이디</label>
+                                    <input type="text" class="form-control" id="user_name" name="user_name">
+                                </div>
+                                <div class="form-group mt-2 mb-2">
+                                    <i class="fa fa-key" style="font-size:24px"></i>
+                                    <label for="user_password">비밀번호</label>
+                                    <input type="password" class="form-control" id="user_password" name="user_password">
+                                </div>
+                                <div class="form-group mt-2 mb-2">
+                                    <i class="fa fa-check-circle-o" style="font-size:24px"></i>
+                                    <label for="user_password2">비밀번호 확인</label>
+                                    <input type="password" class="form-control" id="user_password2"
+                                           name="user_password2">
+                                </div>
+                                <div class="form-group mt-2 mb-2">
+                                    <i class="material-icons">email</i>
+                                    <label for="user_email">이메일</label>
+                                    <input type="email" class="form-control" id="user_email" name="user_email" placeholder="name@email.com">
+                                </div>
+                                <div class="form-group mt-2 mb-2">
+                                    <i class="fa fa-phone" style="font-size:24px"></i>
+                                    <label for="user_number">전화번호</label>
+                                    <input type="tel" class="form-control" id="user_number" name="user_number"
+                                           placeholder="010-1234-5678" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}">
+                                </div>
+                                <i class="fa fa-map-marker" style="font-size:24px"></i>
+                                <label for="user_address">지역</label>
+                                <select class="form-select" id="user_address" name="user_address">
+                                    <option selected>-----</option>
+                                    <option value="1">서울</option>
+                                    <option value="2">경기도</option>
+                                    <option value="3">강원도</option>
+                                    <option value="4">충청도</option>
+                                    <option value="5">전라도</option>
+                                    <option value="6">경상도</option>
+                                    <option value="7">제주도</option>
+                                </select>
+                                <div class="form-group mt-2 mb-2">
+                                    <i class="material-icons" style="font-size:24px">chat_bubble</i>
+                                    <label for="user_bio">오늘의 한마디!</label>
+                                    <input type="text" class="form-control" id="user_bio" name="user_bio" placeholder="오늘도 화이팅 :)">
+                                </div>
+                                {% if error %}
+                                    <div class="alert alert-danger" role="alert">
+                                        {{ error }}
+                                    </div>
+                                {% endif %}
+                                <br>
+                                <div style="float: right">
+                                    <button type="submit" class="btn" style="background-color:Tomato; color:White">회원가입</button>
+                                    <a href="{% url 'login' %}" class="btn btn-secondary">로그인 페이지로</a>
+                                </div>
+                            </form>
+                        </form>
+
+                    </div>
+
+                </div>
+                <div class="col-sm-6 px-0 d-none d-sm-block">
+                    <img src="https://cdn.apartmenttherapy.info/image/upload/f_jpg,q_auto:eco,c_fill,g_auto,w_1500,ar_1:1/k%2FPhoto%2FRecipes%2F2020-01-superbowl-grazing-table%2F2020_superbowl_grazingtable_shot1_288"
+                         alt="Login image" class="w-100 vh-100" style="object-fit: cover; object-position: center;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--
     <div class="container">
         <div class="wrap">
             <h2 class="title-center"> 회원가입 </h2>
@@ -28,7 +109,8 @@
                 </div>
                 <div class="form-group mt-2 mb-2">
                     <label for="user_number">전화번호</label>
-                    <input type="tel" class="form-control" id="user_number" name="user_number" placeholder="010-1234-5678" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}">
+                    <input type="tel" class="form-control" id="user_number" name="user_number" placeholder="010-1234-5678" pattern="
+    [0-9]{3}-[0-9]{4}-[0-9]{4}">
                 </div>
 
                 <label for="user_address">지역</label>
