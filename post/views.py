@@ -3,6 +3,7 @@ from django.core.paginator import Paginator
 from .models import Post,Comment
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 import os
 
 
@@ -53,29 +54,29 @@ def post_view(request, id):
 @login_required
 def post_update_view(request, id):
     post = Post.objects.get(id=id)
-    if request.method == 'GET':
-        return render(request, 'post/update.html', {'post': post})
-    elif request.method == 'POST':
-        post.title = request.POST.get('title', '')
-        post.post = request.POST.get('post', '')
-        post.region = request.POST.get('region', '')
-        post.image = request.FILES.get('image') or post.image
-        if post.title == '' or post.post == '':
-            return redirect('post_update', id=post.id)
-        else:
-            post.save()
-            return redirect('feed')
+    if request.method == 'POST':
+        if request.user.id == post.user_id:
+            post.title = request.POST.get('title', '')
+            post.post = request.POST.get('post', '')
+            post.region = request.POST.get('region', '')
+            post.image = request.FILES.get('image') or post.image
+            if post.title == '' or post.post == '':
+                return redirect('post', id=post.id)
+            else:
+                post.save()
+                return redirect('post', id=post.id)
 
 
 @login_required
 def post_delete_view(request, id):
-    my_tweet = Post.objects.get(id=id)
-    my_tweet.delete()
+    post = Post.objects.get(id=id)
+    if request.user.id == post.user_id:
+        post.delete()
     return redirect('feed')
 
 
 
-
+@login_required
 def comment_create(request,id):
     post = Post.objects.get(id=id)
     if request.method == 'POST':
@@ -90,5 +91,7 @@ def comment_create(request,id):
 @login_required
 def comment_delete(request, comment_id, id):
     comment = Comment.objects.get(id=comment_id)
-    comment.delete()
+    if request.user.id == comment.user_id:
+        comment.delete()
     return redirect('post', comment.post.id)
+    
