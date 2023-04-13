@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.core.paginator import Paginator
-from .models import Post
+from .models import Post,Comment
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 import os
@@ -45,8 +45,9 @@ def post_create_view(request):
 
 def post_view(request, id):
     post = Post.objects.get(id=id)
+    comments = Comment.objects.filter(post=post)
     if request.method == 'GET':
-        return render(request, 'post/detail.html', {'post': post})
+        return render(request, 'post/detail.html', {'post': post, 'comments':comments})
 
 
 @login_required
@@ -71,3 +72,23 @@ def post_delete_view(request, id):
     my_tweet = Post.objects.get(id=id)
     my_tweet.delete()
     return redirect('feed')
+
+
+
+
+def comment_create(request,id):
+    post = Post.objects.get(id=id)
+    if request.method == 'POST':
+        comment = request.POST.get('comment', '')
+        if comment == '':
+            return HttpResponse('댓글을 입력해주세요.')
+        else:
+            Comment.objects.create(name= request.user.username, comment=comment, user=request.user, post=post)
+            return redirect('post', post.id)
+
+
+@login_required
+def comment_delete(request, comment_id, id):
+    comment = Comment.objects.get(id=comment_id)
+    comment.delete()
+    return redirect('post', comment.post.id)
