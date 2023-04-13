@@ -3,14 +3,66 @@
     POST
 {% endblock %}
 {% block content %}
-<br><br><br>
+    <div class="wrap">
         <h1 class="card-title">{{post.title}}</h1>
         <img src="{{post.image.url}}" class="card-img-top" alt="..." style="width:500px ; max-width:500px">
-        <div class="card-body">
-        
-        <p class="card-text">{{post.post}}</p>
-        <p class="card-text"><small class="text-muted">{{post.created_at}}</small></p>
+        <div class="card-body">        
+            <p class="card-text">{{post.post}}</p>            
         </div>
-        <a href ="{% url 'post_update' id=post.id %}" class="btn btn-outline-dark">수정하기</a>
-        <a href ="{% url 'post_delete' id=post.id %}" class="btn btn-outline-dark">삭제하기</a>
+        <div style="float: right">
+            <p class="card-text"><small class="text-muted">{{post.created_at}}</small></p>
+            <a href ="{% url 'post_update' id=post.id %}" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">수정하기</a>
+            <a href ="{% url 'post_delete' id=post.id %}" class="btn btn-outline-dark">삭제하기</a>
+        </div>
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form class="form-area" enctype="multipart/form-data" method="post" action="{% url 'post_update' post.id %}">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">게시글 수정</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">                    
+                            {% csrf_token %}                    
+                                <div class="form-group mt-2 mb-2">
+                                    <label for="username">제목</label>
+                                    <input type="text" class="form-control" name="title" value="{{post.title}}">
+                                </div>      
+                                <label>지역</label>
+                                <select class="form-select" aria-label="Default select example" name="region">
+                                    {% for region in post.regions %}
+                                        {%if region.0 == post.region %}
+                                            <option value="{{region.0}}" selected>{{region.0}}</option>
+                                        {% else %}
+                                            <option value="{{region.0}}">{{region.0}}</option>
+                                        {% endif %} 
+                                    {% endfor %}
+                                </select>    
+                                <hr>        
+                                <label>이미지</label>
+                                <div class="input-group mb-3">
+                                    <input type="file" class="form-control" id="inputGroupFile02" name="image">                        
+                                </div>
+                                <label>설명</label>
+                                <div class="form-floating">
+                                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px" name="post">{{post.post}}</textarea>
+                                </div>
+                                {% if error %}
+                                    <div class="alert alert-danger" role="alert">
+                                        {{ error }}
+                                    </div>
+                                {% endif %}
+                                <div style="float: right">                            
+                            </div>                    
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">닫기</button>
+                            <button type="submit" class="btn btn-outline-dark">수정하기</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>    
 {% endblock %}
