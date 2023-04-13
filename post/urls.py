@@ -11,5 +11,6 @@ urlpatterns = [
     path('post/<int:id>/update/', views.post_update_view,name='post_update'),  # 게시글 수정하기
     path('post/<int:id>/delete/', views.post_delete_view, name='post_delete'),  # 게시글 삭제하기
     path('post/<int:id>/comment/', views.comment_create, name='comment'),  # 댓글 작성하기
+    path('post/<int:id>/comment/<int:comment_id>/edit/', views.comment_edit, name='comment_edit'),  # 댓글 수정하기
     path('post/<int:id>/comment/<int:comment_id>/delete/', views.comment_delete, name='comment_delete'),  # 댓글 삭제하기
 ]
