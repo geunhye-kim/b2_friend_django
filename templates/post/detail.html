@@ -14,11 +14,11 @@
         <div style="float: right">
             <p class="card-text"><small class="text-muted">{{post.created_at}}</small></p>
             {% if post.user == request.user %}
-                <a href ="{% url 'post_update' id=post.id %}" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">수정하기</a>
-                <a class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#staticBackdrop">삭제하기</a>
+                <a href ="{% url 'post_update' id=post.id %}" class="btn me-2 btn_org" data-bs-toggle="modal" data-bs-target="#exampleModal">수정하기</a>
+                <a class="btn me-2 btn_gr" data-bs-toggle="modal" data-bs-target="#staticBackdrop">삭제하기</a>
             {%else%}
-                <a class="btn btn-outline-dark" data-bs-toggle="modal"  onclick="notuser()">수정하기</a>
-                <a class="btn btn-outline-dark" data-bs-toggle="modal"  onclick="notuser()">삭제하기</a>
+                <a class="btn me-2 btn_org" data-bs-toggle="modal"  onclick="notuser()">수정하기</a>
+                <a class="btn me-2 btn_gr" data-bs-toggle="modal"  onclick="notuser()">삭제하기</a>
             {% endif %}
         </div>
         {% if post.user == request.user %}
@@ -65,8 +65,8 @@
                             </div>                    
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">닫기</button>
-                            <button type="submit" class="btn btn-outline-dark">수정하기</button>
+                            <button type="button" class="btn me-2 btn_gr" data-bs-dismiss="modal">닫기</button>
+                            <button type="submit" class="btn me-2 btn_org">수정하기</button>
                         </div>
                     </form>
                 </div>
@@ -85,8 +85,8 @@
                   정말 삭제하시겠어요?
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">닫기</button>
-                  <a href ="{% url 'post_delete' id=post.id %}"  type="button" class="btn btn-outline-dark">삭제하기</a>
+                  <button type="button" class="btn me-2 btn_gr" data-bs-dismiss="modal">닫기</button>
+                  <a href ="{% url 'post_delete' id=post.id %}"  type="button" class="btn me-2 btn_org">삭제하기</a>
                 </div>
               </div>
             </div>
@@ -101,7 +101,7 @@
         <div>
         </div>
         <input type="text" name="comment" style="width: 300px; height: 35px;">
-        <input type="submit" class="btn me-2" style="background-color:darkorange; color:White" value="작성하기">
+        <input type="submit" class="btn me-2 btn_org" value="작성하기">
     </form>
     {% for comment in comments%}
         <div class="card{{comment.id}}" style="width: 50rem; margin-top: 20px;">
@@ -118,12 +118,12 @@
                 <div style="float: right">
                 {% if comment.user == request.user %}
                 <div class="comment_control{{comment.id}}">                
-                    <a class="btn btn-outline-dark" data-bs-toggle="modal"  onclick="edit('{{comment.id}}')">수정</a>
-                    <a href="{%url 'comment_delete' id=post.id comment_id=comment.id%}" class="btn btn-outline-dark">삭제</a>
+                    <a class="btn me-2 btn_org" data-bs-toggle="modal"  onclick="edit('{{comment.id}}')">수정</a>
+                    <a href="{%url 'comment_delete' id=post.id comment_id=comment.id%}" class="btn me-2 btn_gr">삭제</a>
                 </div>
                 {%else%}
-                <a class="btn btn-outline-dark" data-bs-toggle="modal"  onclick="notuser()">수정</a>
-                    <a onclick="notuser()" class="btn btn-outline-dark">삭제</a>
+                <a class="btn me-2 btn_org" data-bs-toggle="modal"  onclick="notuser()">수정</a>
+                    <a onclick="notuser()" class="btn me-2 btn_gr">삭제</a>
                 {% endif %}
                 </div>
             </div>

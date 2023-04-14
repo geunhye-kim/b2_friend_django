@@ -1,54 +1,49 @@
 {% extends 'base.html' %}
-{%load static%}
-
-{% block title %}
-    MYPAGE
-{% endblock %}
-
 {% block content %}
-<section style="background-color: #f4f5f7;"> <!--class="vh-100" 지움-->
-    <div class="container py-5 h-100">
-        <div class="row d-flex justify-content-center align-items-center h-100">
-            <div class="col col-lg-6 mb-4 mb-lg-0">
-                <div id="profile_card">
-                    <div class="card mb-3" style="border-radius: .5rem;">
-                        <div class="row g-0">
-                            <div class="col-md-4 gradient-custom text-center"
-                                    style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
-                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
-                                        alt="Avatar" class="img-fluid my-5" style="width: 140px;"/>
-                                <h5>{{ user.username }}</h5>
-                                <p>{{ user.address }}</p>
-                                <i class="far fa-edit mb-5"></i>
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body p-4">
-                                    <h6>Information</h6>
-                                    <hr class="mt-0 mb-4">
-                                    <div class="row pt-1">
-                                        <div class="col-6 mb-3">
-                                            <h6>Email</h6>
-                                            <p class="text-muted">{{ user.email }}</p>
+
+    <section class="vh-100" style="background-color: #f4f5f7;">
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col col-lg-6 mb-4 mb-lg-0">
+                    <div id="profile_card">
+                        <div class="card mb-3" style="border-radius: .5rem;">
+                            <div class="row g-0">
+                                <div class="col-md-4 gradient-custom text-center"
+                                     style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
+                                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
+                                         alt="Avatar" class="img-fluid my-5" style="width: 140px;"/>
+                                    <h5>{{ user.username }}</h5>
+                                    <p>{{ user.address }}</p>
+                                    <i class="far fa-edit mb-5"></i>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body p-4">
+                                        <h6>Information</h6>
+                                        <hr class="mt-0 mb-4">
+                                        <div class="row pt-1">
+                                            <div class="col-6 mb-3">
+                                                <h6>Email</h6>
+                                                <p class="text-muted">{{ user.email }}</p>
+                                            </div>
+                                            <div class="col-6 mb-3">
+                                                <h6>Phone</h6>
+                                                <p class="text-muted">{{ user.phone }}</p>
+                                            </div>
                                         </div>
-                                        <div class="col-6 mb-3">
-                                            <h6>Phone</h6>
-                                            <p class="text-muted">{{ user.phone }}</p>
+                                        <h6>Projects</h6>
+                                        <hr class="mt-0 mb-4">
+                                        <div class="row pt-1">
+                                            <div class="col-6 mb-3">
+                                                <h6>나의 한마디</h6>
+                                                <p class="text-muted">{{ user.bio }}</p>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <h6>Projects</h6>
-                                    <hr class="mt-0 mb-4">
-                                    <div class="row pt-1">
-                                        <div class="col-6 mb-3">
-                                            <h6>나의 한마디</h6>
-                                            <p class="text-muted">{{ user.bio }}</p>
+                                        <div class="d-flex justify-content-start">
+                                            <a href="#!"><button type="button" class="btn me-2 btn_org">내가 쓴 글 게시글 {{ mypost_count }}개</button></a>
+                                            <a href="{% url 'profile_edit' %}">
+                                                <button type="button" class="btn me-2 btn_gr">프로필 수정</button>
+                                            </a>
                                         </div>
-                                    </div>
-                                    <div class="d-flex justify-content-start">
-                                        <a href="#!"><button type="button" class="btn me-2" style="background-color:darkorange; color:White" 
-                                            onclick="card_show()" id="my-btn">내가 쓴 글 게시글 {{ mypost_count }}개</button></a>
-                                        <a href="{% url 'profile_edit' %}">
-                                            <button type="button" class="btn" style="background-color:darkorange; color:White">프로필 수정</button>
-                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -56,77 +51,8 @@
                     </div>
                 </div>
             </div>
-            <div class="mycards" id="my-cards">
-                <div class="container px-4 px-lg-5 mt-5">
-                    <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                        {% for post in page_obj %}
-                            <!--페이지 오브젝트에서 포스트를 불러오는 것-->
-                            <div class="col mb-5">
-                                <div class="card h-100">
-                                    <!-- 추천스티커-->
-                                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">
-                                        추천글
-                                    </div>
-                                    <!-- 포스트 이미지를 가져오는 곳-->
-                                    <img class="card-img-top" src="{{ post.image.url }}" alt="..."/>
-                                    <!-- 포스팅 카드가 보여지는 곳-->
-                                    <div class="card-body p-4">
-                                        <div class="text-center">
-                                            <!-- 게시글 title-->
-                                            <h5 class="fw-bolder">{{ post.title }}</h5>
-                                            <!-- 게시글 작성자-->
-                                            <label for="" class="">{{ post.region }}</label>
-                                            <hr>
-                                            <label for="" class="">{{ post.user }}</label>
-                                        </div>
-                                    </div>
-                                    <!-- 보러가기 버튼-->
-                                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'post' id=post.id %}">보러가기</a></div>
-                                    </div>
-                                </div>
-                            </div>
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
-            
+           
         </div>
-        
-    </div>
-</section>
-<!-- 페이지네이터 -->
-<nav aria-label="Pagination">
-    <hr class="my-0" />
-    <ul class="pagination justify-content-center my-4">
-        {% if page_obj.has_previous %}
-            <!-- 현재 페이지 이전의 페이지가 있는지 검토하는 함수,있다면 Ture값을 없으면 False값을 반환하여 Ture값일 경우 이전의 페이지 넘버를 보여줌-->
-        <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
-            <!-- ?page=문은 흔히 URL 뒤에 ?뒤에 숫자가 붙는 쿼리 스트링(Query String)이라고 한다네요...-->
-        {% else %}
-        <li class="page-item disabled"><a class="page-link" href="#!">&laquo;</a></li>
-        {% endif %}
-
-        {% for num in page_obj.paginator.page_range %}
-            <!-- 전체 페이지 범위를 반복하면서 각 페이지 번호에 대한 링크를 생성하는데 사용되며 현재페이지=active활성화시킴-->
-            {% if num == page_obj.number %}
-                <!--  num은 페이지네이터에서 돌고있는 페이지 번호, page_obj.number는 현재 요청된 페이지 번호, 즉 현재 페이지를 나타냄 -->
-            <li class="page-item active" aria-current="page"><a class="page-link" href="#!">{{ num }}</a></li>
-            {% else %}
-                {% if num > page_obj.number|add:'-2' and num < page_obj.number|add:'2' %}
-                    <!-- 페이지 기준 -2개의 페이지와 +2개의 페이지 리스트를 보여주기 위함 -->
-                <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
-                {% endif %}
-            {% endif %}
-        {% endfor %}
-
-        {% if page_obj.has_next %}
-            <!-- 다음 페이지가 있다면 >>버튼을 눌렀을때 다음페이지가 나타남-->
-        <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
-        {% else %}
-        <li class="page-item disabled"><a class="page-link" href="#!">&raquo;</a></li>
-        {% endif %}
-    </ul>
-</nav>  
-<script src="{% static 'js/scripts.js' %}"></script>
+    </section>
+    
 {% endblock %}

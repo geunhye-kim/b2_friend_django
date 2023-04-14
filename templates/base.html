@@ -48,6 +48,17 @@
             background-color: tomato;
 
         }
+
+        .btn_org {
+            background-color: darkorange !important;
+            color: white !important;
+        }
+
+        .btn_gr {
+            background-color: gray !important;
+            color: white !important;
+        }
+
         .mycards {
 
         width: 100%;
@@ -144,9 +155,9 @@
                 class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                <li class="nav-item"><a class="nav-link" href="/post/create/">글쓰기</a></li>
+                <li class="nav-item"><a class="nav-link btn me-2 btn_org" href="/post/create/">글쓰기</a></li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
+                    <a class="nav-link dropdown-toggle btn me-2 btn_gr" id="navbarDropdown" href="#" role="button"
                        data-bs-toggle="dropdown" aria-expanded="false">지역선택</a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="/">모든 지역</a></li>
@@ -166,10 +177,10 @@
                 {% if not user.is_authenticated %}
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="{% url 'login'%}"> 로그인 <span class="sr-only"></span></a>
+                        <a class="nav-link btn me-2 btn_org" href="{% url 'login'%}"> 로그인 <span class="sr-only"></span></a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="{% url 'signup'%}"> 회원가입 <span class="sr-only"></span></a>
+                        <a class="nav-link btn me-2 btn_gr" href="{% url 'signup'%}"> 회원가입 <span class="sr-only"></span></a>
                     </li>
                 </ul>
                 {% else %}
@@ -180,9 +191,9 @@
                        </span>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="{% url 'profile' %}"> 마이페이지 </a>
+                        <a class="nav-link btn me-2 btn_org" href="{% url 'profile' %}"> 마이페이지 </a>
                     <li class="nav-item active">
-                        <a class="nav-link" href="/logout"> 로그아웃 </a>
+                        <a class="nav-link btn me-2 btn_gr" style="color:white" href="/logout"> 로그아웃 </a>
                 </li>
                 </ul>
                 {% endif %}
