@@ -97,18 +97,18 @@
 </div>
 
 <!-- 댓글 달기 -->
+{% if user.is_authenticated %}
 <form action="{%url 'comment' id=post.id%}" method = 'post'>
     {%csrf_token%}
-    {% if user.is_authenticated %}
     <div style="display: flex; justify-content: center; width: 45rem; margin: 0 auto;">
-    <input type="text" class="form-control" name="comment">
+    <input type="text" class="form-control" name="comment" style="color: gray;">
     <input type="submit" class="btn me-2 btn_org" value="작성하기" style="margin-left: 20px">
-    {% endif %}
     </div>
 </form>
+{% endif %}
 {% if not user.is_authenticated %}
     <div style="display: flex; justify-content: center; width: 45rem; margin: 0 auto;">
-    <input type="text" name="comment" style="width: 300px; height: 35px;">
+    <input type="text" class="form-control" name="comment" style="color: gray;">
     <input type="submit" class="btn me-2 btn_org" value="작성하기" onclick="notuser()" style="margin-left: 20px">
     </div>
 {% endif %}

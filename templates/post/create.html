@@ -3,7 +3,7 @@
     POST
 {% endblock %}
 {% block content %}
-    <div class="container">
+    <div class="wrap_content">
         <div class="wrap">
             <h2 class="title-center"> 게시글 작성 </h2>
             <form class="form-area" enctype="multipart/form-data" method="post" action="{% url 'post_create' %}">
@@ -46,5 +46,8 @@
             </form>
         </div>
     </div>
+<style>
+footer {display:none}
+</style>    
 {% endblock %}
 
