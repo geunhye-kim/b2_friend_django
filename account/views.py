@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from django.core.paginator import Paginator
 from .models import Profile
-from .forms import ProfileForm
 
 
 def profile(request):
@@ -16,12 +15,14 @@ def profile(request):
 
 
 def profile_edit(request):
-    profile = Profile.objects.first()
-    if request.method == 'POST':
-        form = ProfileForm(request.POST, instance=profile)
-        if form.is_valid():
-            form.save()
-            return redirect('profile')
-    else:
-        form = ProfileForm(instance=profile)
-    return render(request, 'account/profile_edit.html', {'form': form})
+    if request.method == 'GET':
+        user = request.user
+        return render(request, 'account/profile_edit.html', {'user': user})
+    elif request.method == 'POST':
+        user = request.user
+        user.username = request.POST.get('name', '')
+        user.phone = request.POST.get('number', '')
+        user.email = request.POST.get('email', '')
+        user.bio = request.POST.get('bio', '')
+        user.save()
+        return redirect('profile')
