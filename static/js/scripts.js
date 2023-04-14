@@ -17,6 +17,6 @@ function edit(id) {
         "</p>" +
         "<div style='float: right'>" +
         "<input type='hidden' name='csrfmiddlewaretoken' value='" + document.getElementsByName('csrfmiddlewaretoken')[0].value + "'>" +
-        "<input type='submit' class='btn btn-outline-dar' value='수정'></input>" +
+        "<input type='submit' class='btn me-2 btn_org' value='수정'></input>" +
         "</div>"
 }

@@ -1,12 +1,13 @@
 from django.shortcuts import render, redirect
 from django.core.paginator import Paginator
-from .models import Post,Comment
+from .models import Post, Comment
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 import os
 
 
+# 게시물 피드
 def feed_view(request):
     if request.method == 'GET':
         post_list = Post.objects.all()
@@ -16,6 +17,7 @@ def feed_view(request):
         return render(request, 'post/feed.html', {'page_obj': page_obj})
 
 
+# 지역별 게시물 피드
 def feed_region_view(request, region):
     if request.method == 'GET':
         post_list = Post.objects.filter(region=region)
@@ -25,6 +27,7 @@ def feed_region_view(request, region):
         return render(request, 'post/feed.html', {'page_obj': page_obj})
 
 
+# 게시물 작성
 def post_create_view(request):
     if request.method == 'GET':
         return render(request, 'post/create.html')
@@ -41,16 +44,17 @@ def post_create_view(request):
             post = Post.objects.create(
                 title=title, region=region, image=image, post=content, user=request.user)
             return redirect('post', post.id)
-            # return redirect('feed')
 
 
+# 게시물 상세보기
 def post_view(request, id):
     post = Post.objects.get(id=id)
     comments = Comment.objects.filter(post=post)
     if request.method == 'GET':
-        return render(request, 'post/detail.html', {'post': post, 'comments':comments})
+        return render(request, 'post/detail.html', {'post': post, 'comments': comments})
 
 
+# 게시물 수정
 @login_required
 def post_update_view(request, id):
     post = Post.objects.get(id=id)
@@ -67,6 +71,7 @@ def post_update_view(request, id):
                 return redirect('post', id=post.id)
 
 
+# 게시물 삭제
 @login_required
 def post_delete_view(request, id):
     post = Post.objects.get(id=id)
@@ -75,27 +80,30 @@ def post_delete_view(request, id):
     return redirect('feed')
 
 
-
+# 댓글 작성
 @login_required
-def comment_create(request,id):
+def comment_create(request, id):
     post = Post.objects.get(id=id)
     if request.method == 'POST':
         comment = request.POST.get('comment', '')
         if comment == '':
             return redirect('post', post.id)
         else:
-            Comment.objects.create(name= request.user.username, comment=comment, user=request.user, post=post)
+            Comment.objects.create(
+                name=request.user.username, comment=comment, user=request.user, post=post)
             return redirect('post', post.id)
 
 
+# 댓글 삭제
 @login_required
 def comment_delete(request, comment_id, id):
     comment = Comment.objects.get(id=comment_id)
     if request.user.id == comment.user_id:
         comment.delete()
     return redirect('post', comment.post.id)
-    
 
+
+# 댓글 수정
 @login_required
 def comment_edit(request, id, comment_id):
     post = Post.objects.get(id=id)
@@ -108,6 +116,3 @@ def comment_edit(request, id, comment_id):
             comment.comment = comment_data
             comment.save()
     return redirect('post', post.id)
-    
-
-

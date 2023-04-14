@@ -5,9 +5,10 @@
     POST
 {% endblock %}
 {% block content %}
-    <div class="wrap">
+<div class="wrap">
+    <div class="wrap-post">
         <h1 class="card-title">{{post.title}}</h1>
-        <img src="{{post.image.url}}" class="card-img-top" alt="..." style="width:500px ; max-width:500px">
+        <img src="{{post.image.url}}" class="card-img-top" alt="..." >
         <div class="card-body">        
             <p class="card-text">{{post.post}}</p>            
         </div>
@@ -21,88 +22,98 @@
                 <a class="btn me-2 btn_gr" data-bs-toggle="modal"  onclick="notuser()">삭제하기</a>
             {% endif %}
         </div>
-        {% if post.user == request.user %}
-        <!-- 수정하기 Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <form class="form-area" enctype="multipart/form-data" method="post" action="{% url 'post_update' post.id %}">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">게시글 수정</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">                    
-                            {% csrf_token %}                    
-                                <div class="form-group mt-2 mb-2">
-                                    <label for="username">제목</label>
-                                    <input type="text" class="form-control" name="title" value="{{post.title}}">
-                                </div>      
-                                <label>지역</label>
-                                <select class="form-select" aria-label="Default select example" name="region">
-                                    {% for region in post.regions %}
-                                        {%if region.0 == post.region %}
-                                            <option value="{{region.0}}" selected>{{region.0}}</option>
-                                        {% else %}
-                                            <option value="{{region.0}}">{{region.0}}</option>
-                                        {% endif %} 
-                                    {% endfor %}
-                                </select>    
-                                <hr>        
-                                <label>이미지</label>
-                                <div class="input-group mb-3">
-                                    <input type="file" class="form-control" id="inputGroupFile02" name="image">                        
+    </div>
+    {% if post.user == request.user %}
+    <!-- 수정하기 Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form class="form-area" enctype="multipart/form-data" method="post" action="{% url 'post_update' post.id %}">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">게시글 수정</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">                    
+                        {% csrf_token %}                    
+                            <div class="form-group mt-2 mb-2">
+                                <label for="username">제목</label>
+                                <input type="text" class="form-control" name="title" value="{{post.title}}">
+                            </div>      
+                            <label>지역</label>
+                            <select class="form-select" aria-label="Default select example" name="region">
+                                {% for region in post.regions %}
+                                    {%if region.0 == post.region %}
+                                        <option value="{{region.0}}" selected>{{region.0}}</option>
+                                    {% else %}
+                                        <option value="{{region.0}}">{{region.0}}</option>
+                                    {% endif %} 
+                                {% endfor %}
+                            </select>    
+                            <hr>        
+                            <label>이미지</label>
+                            <div class="input-group mb-3">
+                                <input type="file" class="form-control" id="inputGroupFile02" name="image">                        
+                            </div>
+                            <label>설명</label>
+                            <div class="form-floating">
+                                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px" name="post">{{post.post}}</textarea>
+                            </div>
+                            {% if error %}
+                                <div class="alert alert-danger" role="alert">
+                                    {{ error }}
                                 </div>
-                                <label>설명</label>
-                                <div class="form-floating">
-                                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px" name="post">{{post.post}}</textarea>
-                                </div>
-                                {% if error %}
-                                    <div class="alert alert-danger" role="alert">
-                                        {{ error }}
-                                    </div>
-                                {% endif %}
-                                <div style="float: right">                            
-                            </div>                    
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn me-2 btn_gr" data-bs-dismiss="modal">닫기</button>
-                            <button type="submit" class="btn me-2 btn_org">수정하기</button>
-                        </div>
-                    </form>
-                </div>
+                            {% endif %}
+                            <div style="float: right">                            
+                        </div>                    
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn me-2 btn_gr" data-bs-dismiss="modal">닫기</button>
+                        <button type="submit" class="btn me-2 btn_org">수정하기</button>
+                    </div>
+                </form>
             </div>
         </div>
-       
-        <!-- 삭제하기 Modal -->
-        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h1 class="modal-title fs-5" id="staticBackdropLabel">삭제하기</h1>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  정말 삭제하시겠어요?
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn me-2 btn_gr" data-bs-dismiss="modal">닫기</button>
-                  <a href ="{% url 'post_delete' id=post.id %}"  type="button" class="btn me-2 btn_org">삭제하기</a>
-                </div>
-              </div>
+    </div>
+    
+    <!-- 삭제하기 Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">삭제하기</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                정말 삭제하시겠어요?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn me-2 btn_gr" data-bs-dismiss="modal">닫기</button>
+                <a href ="{% url 'post_delete' id=post.id %}"  type="button" class="btn me-2 btn_org">삭제하기</a>
+            </div>
             </div>
         </div>
-        {% endif %}
-    </div>    
+    </div>
+    {% endif %}
+</div>
 
 <!-- 댓글 달기 -->
-<div style="display: grid; place-items: center; ">
-    <form action="{%url 'comment' id=post.id%}" method = 'post'>
-        {%csrf_token%}
-        <div>
-        </div>
-        <input type="text" name="comment" style="width: 300px; height: 35px;">
-        <input type="submit" class="btn me-2 btn_org" value="작성하기">
-    </form>
+<form action="{%url 'comment' id=post.id%}" method = 'post'>
+    {%csrf_token%}
+    {% if user.is_authenticated %}
+    <div style="display: flex; justify-content: center; width: 45rem; margin: 0 auto;">
+    <input type="text" class="form-control" name="comment">
+    <input type="submit" class="btn me-2 btn_org" value="작성하기" style="margin-left: 20px">
+    {% endif %}
+    </div>
+</form>
+{% if not user.is_authenticated %}
+    <div style="display: flex; justify-content: center; width: 45rem; margin: 0 auto;">
+    <input type="text" name="comment" style="width: 300px; height: 35px;">
+    <input type="submit" class="btn me-2 btn_org" value="작성하기" onclick="notuser()" style="margin-left: 20px">
+    </div>
+{% endif %}
+
+<div style="display: grid; place-items: center;">
     {% for comment in comments%}
         <div class="card{{comment.id}}" style="width: 50rem; margin-top: 20px;">
             <div class="card-body">
@@ -112,17 +123,16 @@
                 <form action="{%url 'comment_edit' id=post.id comment_id=comment.id %}" method="POST">
                     {%csrf_token%}
                     <div id='comment_edit{{comment.id}}'>
-
                     </div>
                 </form>
                 <div style="float: right">
                 {% if comment.user == request.user %}
-                <div class="comment_control{{comment.id}}">                
-                    <a class="btn me-2 btn_org" data-bs-toggle="modal"  onclick="edit('{{comment.id}}')">수정</a>
-                    <a href="{%url 'comment_delete' id=post.id comment_id=comment.id%}" class="btn me-2 btn_gr">삭제</a>
-                </div>
+                    <div class="comment_control{{comment.id}}">                
+                        <a class="btn me-2 btn_org" data-bs-toggle="modal"  onclick="edit('{{comment.id}}')">수정</a>
+                        <a href="{%url 'comment_delete' id=post.id comment_id=comment.id%}" class="btn me-2 btn_gr">삭제</a>
+                    </div>
                 {%else%}
-                <a class="btn me-2 btn_org" data-bs-toggle="modal"  onclick="notuser()">수정</a>
+                    <a class="btn me-2 btn_org" data-bs-toggle="modal"  onclick="notuser()">수정</a>
                     <a onclick="notuser()" class="btn me-2 btn_gr">삭제</a>
                 {% endif %}
                 </div>
@@ -135,6 +145,7 @@
 .comm{
     border:none;
     width:100%;
+    margin: -2px -2px -2px -2px;
 }
 .comm:focus{
     outline:none !important;
