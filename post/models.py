@@ -17,6 +17,7 @@ class Post(models.Model):
         ('전라도', '전라도'),
         ('경상도', '경상도'),
         ('제주도', '제주도'),
+        ('평양', '평양'),
     )
     region = models.CharField(choices=regions, max_length=3)
     image = models.ImageField(upload_to='', null=True, blank=True)
