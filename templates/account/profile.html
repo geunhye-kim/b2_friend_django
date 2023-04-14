@@ -14,9 +14,9 @@
                     <div class="card mb-3" style="border-radius: .5rem;">
                         <div class="row g-0">
                             <div class="col-md-4 gradient-custom text-center"
-                                    style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
+                                 style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
                                 <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
-                                        alt="Avatar" class="img-fluid my-5" style="width: 140px;"/>
+                                     alt="Avatar" class="img-fluid my-5" style="width: 140px;"/>
                                 <h5>{{ user.username }}</h5>
                                 <p>{{ user.address }}</p>
                                 <i class="far fa-edit mb-5"></i>
@@ -44,10 +44,9 @@
                                         </div>
                                     </div>
                                     <div class="d-flex justify-content-start">
-                                        <a href="#!"><button type="button" class="btn me-2" style="background-color:darkorange; color:White" 
-                                            onclick="card_show()" id="my-btn">내가 쓴 글 게시글 {{ mypost_count }}개</button></a>
+                                        <a href="#!"><button type="button" class="btn me-2 btn_org">내가 쓴 글 게시글 {{ mypost_count }}개</button></a>
                                         <a href="{% url 'profile_edit' %}">
-                                            <button type="button" class="btn" style="background-color:darkorange; color:White">프로필 수정</button>
+                                            <button type="button" class="btn me-2 btn_gr">프로필 수정</button>
                                         </a>
                                     </div>
                                 </div>
@@ -89,10 +88,8 @@
                         {% endfor %}
                     </div>
                 </div>
-            </div>
-            
-        </div>
-        
+            </div>            
+        </div>        
     </div>
 </section>
 <!-- 페이지네이터 -->
